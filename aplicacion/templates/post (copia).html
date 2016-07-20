@@ -1,0 +1,28 @@
+
+   {% extends "base.html" %}
+    {% block content%}
+      
+      {% if messages %}
+        <ul class="messages">
+          {% for messages in messages %}
+          <li {% if messages.tags %} class="{{ messages.tags }}" {% endif %} }>
+          {{messages}} </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+
+      <h2>Post</h2>
+
+          {% for obj in lista%}
+          	<ul>
+            	<li> <span>{{obj.titulo}}</span> {{obj.creado}}</li> 
+            	<li>{{obj.contenido}}</li>
+            	<button><a href="{%url "editar" id=obj.id%}">Editar</a></button> 
+            	<button><a href="{%url "detalle" id=obj.id%}">Ver</a></button> 
+            	<button><a href="{%url "borrar" id=obj.id%}">Borrar</a></button>
+          	</ul>
+          {%endfor%}
+
+    {% endblock %}
+        

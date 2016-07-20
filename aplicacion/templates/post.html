@@ -1,0 +1,50 @@
+
+      {% if messages %}
+        <ul class="messages">
+          {% for messages in messages %}
+          <li {% if messages.tags %} class="{{ messages.tags }}" {% endif %} }>
+          {{messages}} </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      <h1>Post</h1>
+
+          {% for obj in lista%}
+          	
+            {% if obj.imagen %}
+              <img class="img-responsive" src="{{obj.imagen.url}}" width="304" height="236"> 
+            {% endif %}
+            
+            <ul>
+            	<li class="list-unstyled"> <span class="lead text-info">{{obj.titulo}}</span> {{obj.actualizado|timesince}}</li>
+            	<li class="list-unstyled">{{obj.contenido|linebreaks|truncatechars:200}}</li>
+            	<a href="{%url "editar" id=obj.id%}" class="btn btn-primary">Editar</a> 
+            	<a class="btn btn-success" href="{%url "detalle" id=obj.id%}">Ver</a> 
+            	<a class="btn btn-danger" href="{%url "borrar" id=obj.id%}">Borrar</a>
+          	</ul>
+          {%endfor%}
+
+       <div class="pagination">
+           <span class="step-links">
+               {% if lista.has_previous %}
+                   <a href="?page={{ lista.previous_page_number }}">previous</a>
+               {% endif %}
+
+               <span class="current">
+                   Page {{ lista.number }} of {{ lista.paginator.num_pages }}.
+               </span>
+
+               {% if lista.has_next %}
+                   <a href="?page={{ lista.next_page_number }}">next</a>
+               {% endif %}
+           </span>
+       </div> 
+
+
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
